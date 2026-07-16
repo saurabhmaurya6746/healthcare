@@ -1,18 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RouterProvider } from "@tanstack/react-router"; // StartClient ki jagah RouterProvider
+import { RouterProvider } from "@tanstack/react-router";
 import { getRouter } from "./router";
 
+// Router instance initialize kiya aapke router.tsx function se
 const router = getRouter();
 
-// Client-side single page app ke liye standard root rendering
-const rootElement = document.getElementById("root");
+// Kyunki html/body elements ko __root.tsx khud control kar raha hai,
+// hum direct poore document par hi react-app ko render karenge.
+const root = createRoot(document);
 
-if (rootElement && !rootElement.innerHTML) {
-  const root = createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
-  );
-}
+root.render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
