@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { hydrateRoot } from 'react-dom/client'
-import { StartClient } from '@tanstack/start'
-import { createRouter } from './router'
+import { StrictMode } from "react";
+import { hydrateRoot } from "react-dom/client";
+import { StartClient } from "@tanstack/start";
+import { getRouter } from "./router"; // createRouter ki jagah getRouter import kiya
 
-const router = createRouter()
+// Router instance create kiya aapke getRouter function se
+const router = getRouter();
 
-// Agar aap SSR/Hydration use kar rahe hain:
 hydrateRoot(
   document,
   <StrictMode>
     <StartClient router={router} />
   </StrictMode>
-)
+);
