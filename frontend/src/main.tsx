@@ -1,10 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./styles.css";
+import { StrictMode } from 'react'
+import { hydrateRoot } from 'react-dom/client'
+import { StartClient } from '@tanstack/start'
+import { createRouter } from './router'
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const router = createRouter()
+
+// Agar aap SSR/Hydration use kar rahe hain:
+hydrateRoot(
+  document,
+  <StrictMode>
+    <StartClient router={router} />
+  </StrictMode>
+)
