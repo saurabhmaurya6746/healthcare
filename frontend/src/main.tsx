@@ -1,14 +1,18 @@
 import { StrictMode } from "react";
-import { hydrateRoot } from "react-dom/client";
-import { StartClient } from "@tanstack/start";
-import { getRouter } from "./router"; // createRouter ki jagah getRouter import kiya
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "@tanstack/react-router"; // StartClient ki jagah RouterProvider
+import { getRouter } from "./router";
 
-// Router instance create kiya aapke getRouter function se
 const router = getRouter();
 
-hydrateRoot(
-  document,
-  <StrictMode>
-    <StartClient router={router} />
-  </StrictMode>
-);
+// Client-side single page app ke liye standard root rendering
+const rootElement = document.getElementById("root");
+
+if (rootElement && !rootElement.innerHTML) {
+  const root = createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  );
+}
